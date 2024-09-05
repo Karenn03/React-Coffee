@@ -1,0 +1,52 @@
+.navbar {
+    font-family: 'Montserrat';
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(217, 217, 219, 0.9);  
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: fixed;
+    width: 98%;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid #dee2e6;
+}
+  
+.navbar .left-links, .navbar .right-links {
+    font-family: 'Montserrat';
+    display: flex;
+    align-items: center;
+}
+  
+.navbar .left-links .logo img {
+    width: 50px;
+    margin-right: 20px;
+}
+  
+.navbar .left-links ul {
+    font-family: 'Montserrat';
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+  
+.navbar .left-links li {
+    font-family: 'Montserrat';
+    margin-right: 15px;
+}
+  
+.navbar .left-links a, .navbar .right-links a {
+    font-family: 'Montserrat';
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+  
+.navbar .right-links .btnRegistro {
+    font-family: 'Montserrat';
+    color: #333;
+    padding: 15px;
+}

@@ -1,0 +1,74 @@
+.pide-aqui, .ofertas-especiales {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.vertical-line {
+    width: 2px;
+    height: 170px;
+    background-color: #B7AE8F;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.pide-aqui h2,
+.ofertas-especiales h2 {
+    color: #B7AE8F;
+    margin-top: 0;
+    font-size: 2.1rem;
+    margin-bottom: 10px;
+}
+
+.order-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px 30px;
+}
+
+.coffee-image {
+    margin: 20px 0;
+    width: 370px;
+    height: auto;
+}
+
+.order-options {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.order-option {
+    width: 30%;
+    text-align: left;
+}
+
+.order-option.right {
+    text-align: right;
+}
+
+.order-option h3 {
+    color: #B7AE8F;
+    text-align: center;
+    font-size: 30px;
+}
+
+.order-option p {
+    font-size: 20px;
+}
+
+.order-option button {
+    background-color: #4A362F;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 20px;
+    width: 190px;
+    font-size: 15px;
+}
+
+.order-option button:hover {
+    background-color: #B7AE8F;
+}

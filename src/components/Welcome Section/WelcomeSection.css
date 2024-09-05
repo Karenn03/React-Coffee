@@ -1,0 +1,36 @@
+.hero {
+    background: url(../../assets/img/landing.jpg) no-repeat center center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    color: white;
+    text-align: center;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(74, 54, 47, 0.38);
+    z-index: 1; 
+}
+
+.hero h1 {
+    font-family: 'Montserrat';
+    font-size: 40px;
+    margin: 0;
+    z-index: 2;
+}
+
+.hero h2 {
+    font-family: 'Fjalla One';
+    font-size: 120px;
+    margin: 10px 0 0;
+    z-index: 2;
+}
