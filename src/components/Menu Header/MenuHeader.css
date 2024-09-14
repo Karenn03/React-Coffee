@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+.header {
+    font-family: "Fjalla One";
+    background-image: url(../../assets/img/header.webp);
+    background-size: cover;
+    height: 260px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 2em;
+    margin-top: 60px;
+    background-position: center;
+    text-align: center;
+    padding: 100px 0;
+}
+
+.header h1 {
+    font-family: "Fjalla One";
+    color: #d9d9db;
+    font-size: 3em;
+    margin: 0;
+}

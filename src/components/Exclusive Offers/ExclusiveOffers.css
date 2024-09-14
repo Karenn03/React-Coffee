@@ -1,0 +1,69 @@
+.subscription-section {
+    position: relative;
+    display: flex;
+    padding: 100px 0; 
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 120px;
+    margin-bottom: 60px;
+    height: 300px;
+    background-image: url(../../assets/img/exclusive-offers.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.subscription-overlay {
+    position: relative;
+    z-index: 3;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.subscription-section h2 {
+    font-size: 2.5rem;
+    margin: 0 0 20px;
+    color: #FFFEFC;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+}
+
+.subscription-section p {
+    font-size: 1.2rem;
+    margin: 0 0 20px;
+    color: #FFFEFC;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.subscription-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.subscription-form input[type="email"] {
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    z-index: 2; 
+    width: 210px;
+    background-color: #FFFEFC;
+}
+
+.subscription-form button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    background-color: #B7AE8F;
+    color: white;
+    cursor: pointer;
+    width: 130px;
+}
+
+.subscription-form button:hover {
+    background-color: #978F84;
+}

@@ -1,9 +1,17 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
+
+import SignIn from './pages/Sign In/SignIn'
+import SignUp from './pages/Sign Up/SignUp'
+import Menu from './pages/Menu/Menu';
+
 import Navbar from './components/Navbar/Navbar';
 import WelcomeSection from './components/Welcome Section/WelcomeSection';
 import OrderHere from './components/Order Here/OrderHere';
 import SpecialOffers from './components/Special Offers/SpecialOffers';
+import ExclusiveOffers from './components/Exclusive Offers/ExclusiveOffers';
+
 import oferta1 from './assets/img/oferta-1.png'; 
 import oferta2 from './assets/img/oferta-2.png'; 
 import oferta3 from './assets/img/oferta-3.png'; 
@@ -18,6 +26,19 @@ const offers = [
 
 function App() {
   return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/menu" element={<Menu />} />
+        <Route path="/signIn" element={<SignIn />} />
+        <Route path="/signUp" element={<SignUp />} />
+      </Routes>
+    </Router>
+  );
+}
+
+const HomePage = () => {
+  return (
     <div className="App">
       <Navbar />
       <WelcomeSection />
@@ -25,8 +46,9 @@ function App() {
         <OrderHere />
         <SpecialOffers offers={offers} />
       </section>
+      <ExclusiveOffers />
     </div>
   );
-}
+};
 
 export default App;

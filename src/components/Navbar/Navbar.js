@@ -1,6 +1,7 @@
 import React from 'react';
 import './Navbar.css';
 import logo from '../../assets/img/logo.png'; 
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
@@ -14,38 +15,25 @@ const Navbar = () => {
                 </div>
                 <ul>
                     <li>
-                        <a href="menu.html" className="nav-item nav-link active">
-                            {" "}
-                            Menú{" "}
-                        </a>
+                        <Link to="/menu" className="nav-item nav-link active"> Menú </Link>
                     </li>
                     <li>
-                        <a href="mis-pedidos.html" className="nav-item nav-link">
-                            {" "}
-                            Mis Pedidos{" "}
-                        </a>
+                        <Link to="mis-pedidos.html" className="nav-item nav-link"> Mis Pedidos </Link>
                     </li>
                     <li>
-                        <a href="reservar-mesa.html" className="nav-item nav-link">
-                            {" "}
-                            Reservar Mesa{" "}
-                        </a>
+                        <Link to="reservar-mesa.html" className="nav-item nav-link"> Reservar Mesa </Link>
                     </li>
                     <li>
-                        <a href="#" className="nav-item nav-link">
-                            {" "}
-                            Carrito{" "}
-                        </a>
+                        <Link to="#" className="nav-item nav-link"> Carrito </Link>
                     </li>
                 </ul>
             </div>
             <div className="right-links">
-                <a href="inicio-sesion.html"> Inicia Sesión </a>
-                <a href="registro.html" className="btnRegistro"> Regístrate </a>
+                <Link to="/signUp"> Inicia Sesión </Link>
+                <Link to="/signIn" className="btnRegistro"> Regístrate </Link>
             </div>
         </nav>
     </div>
-
   );
 };
 

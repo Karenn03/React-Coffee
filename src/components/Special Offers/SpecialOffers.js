@@ -20,7 +20,7 @@ const SpecialOffers = ({ offers }) => {
           ))}
         </div>
       </div>
-  );
+    );
 };
 
 export default SpecialOffers;
