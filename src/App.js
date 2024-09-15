@@ -5,6 +5,9 @@ import './App.css';
 import SignIn from './pages/Sign In/SignIn'
 import SignUp from './pages/Sign Up/SignUp'
 import Menu from './pages/Menu/Menu';
+import MyOrders from './pages/My Orders/MyOrders';
+import ReserveTable from './pages/Reserve a Table/ReserveTable';
+import ShoppingCart from './pages/Shopping Cart/ShoppingCart';
 
 import Navbar from './components/Navbar/Navbar';
 import WelcomeSection from './components/Welcome Section/WelcomeSection';
@@ -30,6 +33,9 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/menu" element={<Menu />} />
+        <Route path="/myOrders" element={<MyOrders />} />
+        <Route path="/reserveTable" element={<ReserveTable />} />
+        <Route path="/shoppingCart" element={<ShoppingCart />} />
         <Route path="/signIn" element={<SignIn />} />
         <Route path="/signUp" element={<SignUp />} />
       </Routes>

@@ -1,3 +1,10 @@
+body {
+    font-family: 'Montserrat';
+    margin: 0;
+    padding: 0;
+    background-color: #FFFEFC;
+}
+
 .ofertas-especiales h4 {
     color: #4A362F;
     margin-top: 0px;
