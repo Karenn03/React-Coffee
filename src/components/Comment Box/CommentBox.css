@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+.comment {
+    background-color: #FFFEFC;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    /* margin: 20px 155px; */
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.user-img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    margin: 10px;
+}
+
+.comment-info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.user-name {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #B7AE8F;
+    margin-right: 10px;
+}
+
+.comment-meta {
+    align-items: center;
+    justify-content: space-between;
+}
+
+.comment-date {
+    font-size: 0.9em;
+    color: #A6A6A6;
+    margin-left: 10px;
+}
+
+.comment-body {
+    font-size: 0.9em;
+    color: #000000;
+    margin-top: 5px;
+    text-align: justify;
+}
+
+.star {
+    color: #B7AE8F;
+    font-size: 1.22em;
+}

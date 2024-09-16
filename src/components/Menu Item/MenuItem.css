@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    font-family: 'Montserrat';
+    margin: 0;
+    padding: 0;
+    background-color: #FFFEFC;
+}
+
+.drinks-section,
+.food-section {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+.drink,
+.food {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 15%;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.drink:hover,
+.food:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.drink h2,
+.food h2 {
+    font-family: "Fjalla One";
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.drink img,
+.food img {
+    width: auto;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.buttons {
+    font-family: "Montserrat";
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.buttons .btn-cart,
+.buttons .btn-details,
+.buttons .btn-heart {
+    border: 2px solid #4a362f;
+    background-color: #fff;
+    cursor: pointer;
+    color: #4a362f;
+    font-size: 1.2em;
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.buttons .btn-cart:hover,
+.buttons .btn-heart:hover {
+    background-color: #4a362f; 
+    color: #fff; 
+}
+
+.buttons .btn-cart .fa,
+.buttons .btn-heart .fa {
+    font-size: 1em;
+}
+
+.buttons .btn-details {
+    background-color: #fff;
+    color: #4a362f;
+    padding: 5px 15px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    transition: background-color 0.3s, color 0.3s;
+    width: auto;
+    height: auto;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.buttons .btn-details:hover {
+    background-color: #4a362f; 
+    color: #fff; 
+}

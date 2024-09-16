@@ -4,10 +4,10 @@ import './MenuHeader.css';
 const MenuHeader = ({ title }) => {
     return (
         <>
-        <header className="header">
-            <h1>{title}</h1>
-        </header>
-        <br />
+            <header className="header">
+                <h1>{title}</h1>
+            </header>
+            <br />
         </>
     );
 };

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './MyOrders.css';
 import Navbar from '../../components/Navbar/Navbar';
+import { Link } from 'react-router-dom';
 
 const MyOrders = () => {
     // Estado para controlar el botón activo
@@ -44,7 +45,7 @@ const MyOrders = () => {
                         <i className="fas fa-shopping-bag"></i>
                         <p>¡Haz tu primera compra!</p>
                         <p>Aquí podrás ver tus compras y hacer el seguimiento de tus envíos.</p>
-                        <a href="menu.html" className="btn-order-now">Compra ahora</a>
+                        <Link to="/menu" className="btn-order-now">Compra ahora</Link>
                     </div>
                 );
         }

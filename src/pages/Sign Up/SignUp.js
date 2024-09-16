@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './SignUp.css';
 import logo from '../../assets/img/logo.png'; 
+import { Link } from 'react-router-dom';
 
 const SignUp = () => {
     // Estados para almacenar los valores de los inputs
@@ -114,7 +115,7 @@ const SignUp = () => {
                 <div className="logo-container">
                     <img src={logo} alt="Logo" />
                 </div>
-                <h2>¿Ya tienes una cuenta? <a href="inicio-sesion.html">Inicia sesión</a></h2>
+                <h2>¿Ya tienes una cuenta? <Link to="/signIn">Inicia sesión</Link></h2>
                 <form className="registration-form" id="form" onSubmit={handleSubmit}>
                     <div className="form-group">
                         <i className="fa fa-id-card" />

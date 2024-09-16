@@ -13,6 +13,42 @@ body {
     height: 100vh;
 }
 
+.sidebar {
+    font-family: "Montserrat";
+    width: 250px;
+    background-color: #4e3d3b;
+    color: white;
+    padding: 20px;
+    padding-top: 80px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 0;
+    width: 100%;
+    border-bottom: 1px solid #b4a69c;
+}
+
+.menu-item {
+    display: block;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    margin: 10px 0;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.menu-item:hover .menu-item:active{
+    background-color: #3a2e2d;
+    color: #fff;
+}
+
 .fa-solid, .fas {
     font-family: "Font Awesome 6 Free";
     font-weight: 900;

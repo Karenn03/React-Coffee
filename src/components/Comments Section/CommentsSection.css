@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+.reviews-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3px;
+}
+
+.reviews-section h4 {
+    color: #4A362F;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.reviews-section h2 {
+    color: #B7AE8F;
+    margin-top: 0;
+    font-size: 2.1rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.overall-rating {
+    text-align: center;
+    display: grid;
+}
+
+.rating-number {
+    font-family: 'Montserrat';
+    font-size: 3.4em;
+    font-weight: bold;
+    flex-basis: 20%;
+    text-align: center;
+    color: #4A362F;
+}
+
+.number-rating {
+    font-family: 'Montserrat';
+    font-size: 1em;
+    font-weight: bold;
+    flex-basis: 20%;
+    text-align: right;
+    color: #4A362F;
+}
+
+.stars {
+    color: #4A362F;
+    font-size: 1.6em;
+}
+
+.total-reviews {
+    font-family: 'Montserrat';
+    font-size: 0.9em;
+    color: #4A362F;
+}
+
+.detailed-ratings {
+    flex-grow: 1;
+    padding-left: 25px;
+}
+
+.rating-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.category {
+    flex-basis: 20%;
+    text-align: center;
+    color: #7a7a7a;
+}
+
+.category2 {
+    flex-basis: 20%;
+    text-align: left;
+    color: #7a7a7a;
+}
+
+.rating-bar {
+    width: 60%;
+    height: 10px;
+    background-color: #ddd;
+    position: relative;
+    margin-right: 5px;
+    margin-left: 15px;
+    border-radius: 10px;
+}
+
+.rating-fill {
+    height: 100%;
+    background-color: #B7AE8F;
+    position: absolute;
+    border-radius: 10px;
+    top: 0;
+    left: 0;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    /* margin: 20px 155px; */
+}
+
+.buttons button {
+    background-color: #4A362F;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 25px;
+    margin: 0 5px;
+}
+
+.buttons .review-button:hover {
+    background-color: #B7AE8F;
+}
+
+.right-buttons {
+    display: flex;
+}
+
+.right-buttons button {
+    background-color: #4A362F;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 25px;
+    margin: 0 5px;
+}
+
+.right-buttons button:hover {
+    background-color: #B7AE8F;
+}
+
+.comments {
+    margin-top: 20px;
+}
+
+.comment-form-container {
+    background-color: #FFFEFC; 
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    /* margin: 20px 155px; */
+}
+
+.comment-form-container h3 {
+    color: #4A362F;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #4A362F;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 98%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #4A362F;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.submit-button {
+    background-color: #4A362F;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 25px;
+}
+
+.submit-button:hover {
+    background-color: #B7AE8F;
+}
+
+#toggle-review-form {
+    background-color: #4A362F;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 25px;
+    margin: 0 5px;
+}
+
+#toggle-review-form:hover {
+    background-color: #B7AE8F;
+}

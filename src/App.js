@@ -2,18 +2,25 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 
-import SignIn from './pages/Sign In/SignIn'
-import SignUp from './pages/Sign Up/SignUp'
 import Menu from './pages/Menu/Menu';
 import MyOrders from './pages/My Orders/MyOrders';
 import ReserveTable from './pages/Reserve a Table/ReserveTable';
+import AdminDashboard from './pages/Admin Dashboard/AdminDashboard';
+import SignIn from './pages/Sign In/SignIn';
+import SignUp from './pages/Sign Up/SignUp';
+import ResetPassword from './pages/Reset Password/ResetPassword';
+import DeliveryOrder from './pages/Delivery Order/DeliveryOrder';
+import PickupOrder from './pages/Pickup Order/PickupOrder';
 import ShoppingCart from './pages/Shopping Cart/ShoppingCart';
+import { CartProvider } from './pages/Shopping Cart/CartContext';
 
 import Navbar from './components/Navbar/Navbar';
 import WelcomeSection from './components/Welcome Section/WelcomeSection';
 import OrderHere from './components/Order Here/OrderHere';
 import SpecialOffers from './components/Special Offers/SpecialOffers';
 import ExclusiveOffers from './components/Exclusive Offers/ExclusiveOffers';
+import CommentsSection from './components/Comments Section/CommentsSection';
+import Footer from './components/Footer/Footer';
 
 import oferta1 from './assets/img/oferta-1.png'; 
 import oferta2 from './assets/img/oferta-2.png'; 
@@ -29,7 +36,7 @@ const offers = [
 
 function App() {
   return (
-    <Router>
+    <CartProvider>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/menu" element={<Menu />} />
@@ -38,8 +45,13 @@ function App() {
         <Route path="/shoppingCart" element={<ShoppingCart />} />
         <Route path="/signIn" element={<SignIn />} />
         <Route path="/signUp" element={<SignUp />} />
+
+        <Route path="/resetPassword" element={<ResetPassword />} />
+        <Route path="/adminDashboard" element={<AdminDashboard />} />
+        <Route path="/deliveryOrder" element={<DeliveryOrder />} />
+        <Route path="/pickupOrder" element={<PickupOrder />} />
       </Routes>
-    </Router>
+    </CartProvider>
   );
 }
 
@@ -53,6 +65,9 @@ const HomePage = () => {
         <SpecialOffers offers={offers} />
       </section>
       <ExclusiveOffers />
+      <CommentsSection />
+      <br />
+      <Footer />
     </div>
   );
 };

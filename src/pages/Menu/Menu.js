@@ -1,4 +1,5 @@
 import React from 'react';
+import { useCart } from '../../pages/Shopping Cart/CartContext';
 import './Menu.css';
 
 import Americano from '../../assets/img/americano.png'; 
@@ -82,642 +83,565 @@ import WrapPollo from '../../assets/img/wrap-pollo.png';
 import WrapRoastBeef from '../../assets/img/wrap-roast-beef.png';
 import WrapTradicionalRes from '../../assets/img/wrap-tradicional-de-res.png';
 
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-
 import MenuHeader from '../../components/Menu Header/MenuHeader';
 import MenuItem from '../../components/Menu Item/MenuItem';
 import Navbar from '../../components/Navbar/Navbar';
 
 const Menu = () => {
+    const { addToCart } = useCart(); // Usa useCart para obtener addToCart
+
     return (
         <>
             <Navbar />
             <MenuHeader title="Bebidas Calientes" />
-            <div class="drinks-section">
-                <MenuItem
-                    className="drink"
-                    title="AMERICANO"
-                    imageSrc={Americano}
-                    imageAlt="Americano"
+            <div className="drinks-section">
+                <MenuItem className="drink" title="AMERICANO"
+                    imageSrc={Americano} imageAlt="Americano"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="CAPPUCCINO AMERICANO"
-                    imageSrc={CappuccinoAmericano}
-                    imageAlt="Cappuccino Americano"
+                <MenuItem className="drink" title="CAPPUCCINO AMERICANO"
+                    imageSrc={CappuccinoAmericano} imageAlt="Cappuccino Americano"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="CAPPUCCINO"
-                    imageSrc={Cappuccino}
-                    imageAlt="Cappuccino"
+                <MenuItem className="drink" title="CAPPUCCINO"
+                    imageSrc={Cappuccino} imageAlt="Cappuccino"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="CARAMEL MACCHIATO"
-                    imageSrc={CaramelMacchiato}
-                    imageAlt="Caramel Macchiato"
+                <MenuItem className="drink" title="CARAMEL MACCHIATO"
+                    imageSrc={CaramelMacchiato} imageAlt="Caramel Macchiato"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="ESPRESSO DOBLE"
-                    imageSrc={EspressoDoble}
-                    imageAlt="Espresso Doble"
+                <MenuItem className="drink" title="ESPRESSO DOBLE"
+                    imageSrc={EspressoDoble} imageAlt="Espresso Doble"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="ESPRESSO SENCILLO"
-                    imageSrc={EspressoSencillo}
-                    imageAlt="Espresso Sencillo"
+                <MenuItem className="drink" title="ESPRESSO SENCILLO"
+                    imageSrc={EspressoSencillo} imageAlt="Espresso Sencillo"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="CHOCOLATE"
-                    imageSrc={Chocolate}
-                    imageAlt="Chocolate"
+                <MenuItem className="drink" title="CHOCOLATE"
+                    imageSrc={Chocolate} imageAlt="Chocolate"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="CHOCOLATE BLANCO"
-                    imageSrc={ChocolateBlanco}
-                    imageAlt="Chocolate Blanco"
+                <MenuItem className="drink" title="CHOCOLATE BLANCO"
+                    imageSrc={ChocolateBlanco} imageAlt="Chocolate Blanco"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="LATTE MACCHIATO"
-                    imageSrc={LatteMacchiato}
-                    imageAlt="Latte Macchiato"
+                <MenuItem className="drink" title="LATTE MACCHIATO"
+                    imageSrc={LatteMacchiato} imageAlt="Latte Macchiato"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="LATTE"
-                    imageSrc={Latte}
-                    imageAlt="Latte"
+                <MenuItem className="drink" title="LATTE"
+                    imageSrc={Latte} imageAlt="Latte"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="MACCHIATO"
-                    imageSrc={Macchiato}
-                    imageAlt="Macchiato"
+                <MenuItem className="drink" title="MACCHIATO"
+                    imageSrc={Macchiato} imageAlt="Macchiato"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="MACCHIATO ESPRESSO"
-                    imageSrc={MacchiatoEspresso}
-                    imageAlt="Macchiato Espresso"
+                <MenuItem className="drink" title="MACCHIATO ESPRESSO"
+                    imageSrc={MacchiatoEspresso} imageAlt="Macchiato Espresso"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="MILO"
-                    imageSrc={Milo}
-                    imageAlt="Milo"
+                <MenuItem className="drink" title="MILO"
+                    imageSrc={Milo} imageAlt="Milo"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="MOCHA"
-                    imageSrc={Mocha}
-                    imageAlt="Mocha"
+                <MenuItem className="drink" title="MOCHA"
+                    imageSrc={Mocha} imageAlt="Mocha"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
             </div>
             <MenuHeader title="Bebidas Frías" />
             <div class="drinks-section">
-                <MenuItem
-                    className="drink"
-                    title="FRAPPÉ MOCCA"
-                    imageSrc={FrappéMocca}
-                    imageAlt="Frappé Mocca"
+                <MenuItem className="drink" title="FRAPPÉ MOCCA"
+                    imageSrc={FrappéMocca} imageAlt="Frappé Mocca"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="FRAPPÉ OREO"
-                    imageSrc={FrappéOreo}
-                    imageAlt="Frappé Oreo"
+                <MenuItem className="drink" title="FRAPPÉ OREO"
+                    imageSrc={FrappéOreo} imageAlt="Frappé Oreo"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="ICED CAPPUCCINO"
-                    imageSrc={IcedCappuccino}
-                    imageAlt="Iced Cappuccino"
+                <MenuItem className="drink" title="ICED CAPPUCCINO"
+                    imageSrc={IcedCappuccino} imageAlt="Iced Cappuccino"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="ICED CARAMEL LATTE"
-                    imageSrc={IcedCaramelLatte}
-                    imageAlt="Iced Caramel Latte"
+                <MenuItem className="drink" title="ICED CARAMEL LATTE"
+                    imageSrc={IcedCaramelLatte} imageAlt="Iced Caramel Latte"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="ICED CARAMEL MACCHIATO"
-                    imageSrc={IcedCaramelMacchiato}
-                    imageAlt="Iced Caramel Macchiato"
+                <MenuItem className="drink" title="ICED CARAMEL MACCHIATO"
+                    imageSrc={IcedCaramelMacchiato} imageAlt="Iced Caramel Macchiato"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="ICED MACCHIATO"
-                    imageSrc={IcedMacchiato}
-                    imageAlt="Iced Macchiato"
+                <MenuItem className="drink" title="ICED MACCHIATO"
+                    imageSrc={IcedMacchiato} imageAlt="Iced Macchiato"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="ICED VAINILLA LATTE"
-                    imageSrc={IcedVainillaLatte}
-                    imageAlt="Iced Vainilla Latte"
+                <MenuItem className="drink" title="ICED VAINILLA LATTE"
+                    imageSrc={IcedVainillaLatte} imageAlt="Iced Vainilla Latte"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="ICED AMERICANO"
-                    imageSrc={IcedAmericano}
-                    imageAlt="Iced Americano"
+                <MenuItem className="drink" title="ICED AMERICANO"
+                    imageSrc={IcedAmericano} imageAlt="Iced Americano"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="ICED MOCHA"
-                    imageSrc={IcedMocha}
-                    imageAlt="Iced Mocha"
+                <MenuItem className="drink" title="ICED MOCHA"
+                    imageSrc={IcedMocha} imageAlt="Iced Mocha"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="ICED LATTE"
-                    imageSrc={IcedLatte}
-                    imageAlt="Iced Latte"
+                <MenuItem className="drink" title="ICED LATTE"
+                    imageSrc={IcedLatte} imageAlt="Iced Latte"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="MILKSHAKE CHOCOLATE"
-                    imageSrc={MilkshakeChocolate}
-                    imageAlt="Milkshake Chocolate"
+                <MenuItem className="drink" title="MILKSHAKE CHOCOLATE"
+                    imageSrc={MilkshakeChocolate} imageAlt="Milkshake Chocolate"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="MILKSHAKE FRESA"
-                    imageSrc={MilkshakeFresa}
-                    imageAlt="Milkshake Fresa"
+                <MenuItem className="drink" title="MILKSHAKE FRESA"
+                    imageSrc={MilkshakeFresa} imageAlt="Milkshake Fresa"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="MILKSHAKE OREO"
-                    imageSrc={MilkshakeOreo}
-                    imageAlt="Milkshake Oreo"
+                <MenuItem className="drink" title="MILKSHAKE OREO"
+                    imageSrc={MilkshakeOreo} imageAlt="Milkshake Oreo"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="drink"
-                    title="MILKSHAKE VAINILLA"
-                    imageSrc={MilkshakeVainilla}
-                    imageAlt="Milkshake Vainilla"
+                <MenuItem className="drink" title="MILKSHAKE VAINILLA"
+                    imageSrc={MilkshakeVainilla} imageAlt="Milkshake Vainilla"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
             </div>
             <MenuHeader title="Panadería y Pastelería" />
             <div class="food-section">
-            <MenuItem
-                    className="food"
-                    title="CHEESECAKE DE FRESA"
-                    imageSrc={CheesecakeFresa}
-                    imageAlt="Cheesecake de Fresa"
+                <MenuItem className="food" title="CHEESECAKE DE FRESA"
+                    imageSrc={CheesecakeFresa} imageAlt="Cheesecake de Fresa"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="CROISSANT DE ALMENDRAS"
-                    imageSrc={CroissantAlmendras}
-                    imageAlt="Croissant de Almendras"
+                <MenuItem className="food" title="CROISSANT DE ALMENDRAS"
+                    imageSrc={CroissantAlmendras} imageAlt="Croissant de Almendras"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="CROISSANT DE CHOCOLATE"
-                    imageSrc={CroissantChocolate}
-                    imageAlt="Croissant de Chocolate"
+                <MenuItem className="food" title="CROISSANT DE CHOCOLATE"
+                    imageSrc={CroissantChocolate} imageAlt="Croissant de Chocolate"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="CROISSANT DE JAMÓN Y QUESO"
-                    imageSrc={CroissantJamónQueso}
-                    imageAlt="Croissant de Jamón y Queso"
+                <MenuItem className="food" title="CROISSANT DE JAMÓN Y QUESO"
+                    imageSrc={CroissantJamónQueso} imageAlt="Croissant de Jamón y Queso"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="CROISSANT DE MANTEQUILLA"
-                    imageSrc={CroissantMantequilla}
-                    imageAlt="Croissant de Mantequilla"
+                <MenuItem className="food" title="CROISSANT DE MANTEQUILLA"
+                    imageSrc={CroissantMantequilla} imageAlt="Croissant de Mantequilla"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="DONA DE CHOCOLATE BLANCO"
-                    imageSrc={DonaChocolateBlanco}
-                    imageAlt="Dona de Chocolate Blanco"
+                <MenuItem className="food" title="DONA DE CHOCOLATE BLANCO"
+                    imageSrc={DonaChocolateBlanco} imageAlt="Dona de Chocolate Blanco"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="DONA DE CHOCOLATE"
-                    imageSrc={DonaChocolate}
-                    imageAlt="Dona de Chocolate"
+                <MenuItem className="food" title="DONA DE CHOCOLATE"
+                    imageSrc={DonaChocolate} imageAlt="Dona de Chocolate"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="DONA DE FRESA"
-                    imageSrc={DonaFresa}
-                    imageAlt="Dona de Fresa"
+                <MenuItem className="food" title="DONA DE FRESA"
+                    imageSrc={DonaFresa} imageAlt="Dona de Fresa"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="GALLETA CHIPS DE CHOCOLATE"
-                    imageSrc={GalletaChipsChocolate}
-                    imageAlt="Galleta Chips de Chocolate"
+                <MenuItem className="food" title="GALLETA CHIPS DE CHOCOLATE"
+                    imageSrc={GalletaChipsChocolate} imageAlt="Galleta Chips de Chocolate"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="GALLETA DE AVENA"
-                    imageSrc={GalletaAvena}
-                    imageAlt="Galleta de Avena"
+                <MenuItem className="food" title="GALLETA DE AVENA"
+                    imageSrc={GalletaAvena} imageAlt="Galleta de Avena"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="GALLETA DE CHOCOLATE"
-                    imageSrc={GalletaChocolate}
-                    imageAlt="Galleta de Chocolate"
+                <MenuItem className="food" title="GALLETA DE CHOCOLATE"
+                    imageSrc={GalletaChocolate} imageAlt="Galleta de Chocolate"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="GALLETA DE MANTEQUILLA"
-                    imageSrc={GalletaMantequilla}
-                    imageAlt="Galleta de Mantequilla"
+                <MenuItem className="food" title="GALLETA DE MANTEQUILLA"
+                    imageSrc={GalletaMantequilla} imageAlt="Galleta de Mantequilla"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="MUFFIN CHIPS DE BANANA"
-                    imageSrc={MuffinChipsBanana}
-                    imageAlt="Muffin Chips de Banana"
+                <MenuItem className="food" title="MUFFIN CHIPS DE BANANA"
+                    imageSrc={MuffinChipsBanana} imageAlt="Muffin Chips de Banana"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="MUFFIN CHIPS DE CHOCOLATE"
-                    imageSrc={MuffinChipsChocolate}
-                    imageAlt="Muffin Chips de Chocolate"
+                <MenuItem className="food" title="MUFFIN CHIPS DE CHOCOLATE"
+                    imageSrc={MuffinChipsChocolate} imageAlt="Muffin Chips de Chocolate"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="MUFFIN DE ARÁNDANOS"
-                    imageSrc={MuffinArándanos}
-                    imageAlt="Muffin de Arándanos"
+                <MenuItem className="food" title="MUFFIN DE ARÁNDANOS"
+                    imageSrc={MuffinArándanos} imageAlt="Muffin de Arándanos"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="MUFFIN DE CHOCOLATE"
-                    imageSrc={MuffinChocolate}
-                    imageAlt="Muffin de Chocolate"
+                <MenuItem className="food" title="MUFFIN DE CHOCOLATE"
+                    imageSrc={MuffinChocolate} imageAlt="Muffin de Chocolate"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="MUFFIN DE FRESA"
-                    imageSrc={MuffinFresa}
-                    imageAlt="Muffin de Fresa"
+                <MenuItem className="food" title="MUFFIN DE FRESA"
+                    imageSrc={MuffinFresa} imageAlt="Muffin de Fresa"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="MUFFIN DE OREO"
-                    imageSrc={MuffinOreo}
-                    imageAlt="Muffin de Oreo"
+                <MenuItem className="food" title="MUFFIN DE OREO"
+                    imageSrc={MuffinOreo} imageAlt="Muffin de Oreo"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="MUFFIN DE RED VELVET"
-                    imageSrc={MuffinRedVelvet}
-                    imageAlt="Muffin de Red Velvet"
+                <MenuItem className="food" title="MUFFIN DE RED VELVET"
+                    imageSrc={MuffinRedVelvet} imageAlt="Muffin de Red Velvet"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="PASTEL DE CHOCOLATE"
-                    imageSrc={PastelChocolate}
-                    imageAlt="Pastel de Chocolate"
+                <MenuItem className="food" title="PASTEL DE CHOCOLATE"
+                    imageSrc={PastelChocolate} imageAlt="Pastel de Chocolate"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })}  
                 />
-                <MenuItem
-                    className="food"
-                    title="PASTEL DE LIMÓN"
-                    imageSrc={PastelLimón}
-                    imageAlt="Pastel de Limón"
+                <MenuItem className="food" title="PASTEL DE LIMÓN"
+                    imageSrc={PastelLimón} imageAlt="Pastel de Limón"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="PASTEL DE RED VELVET"
-                    imageSrc={PastelRedVelvet}
-                    imageAlt="Pastel de Red Velvet"
+                <MenuItem className="food" title="PASTEL DE RED VELVET"
+                    imageSrc={PastelRedVelvet} imageAlt="Pastel de Red Velvet"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="PASTEL DE ZANAHORIA"
-                    imageSrc={PastelZanahoria}
-                    imageAlt="Pastel de Zanahoria"
+                <MenuItem className="food" title="PASTEL DE ZANAHORIA"
+                    imageSrc={PastelZanahoria} imageAlt="Pastel de Zanahoria"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="TIRAMISÚ"
-                    imageSrc={Tiramisú}
-                    imageAlt="Tiramisú"
+                <MenuItem className="food" title="TIRAMISÚ"
+                    imageSrc={Tiramisú} imageAlt="Tiramisú"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
             </div>
             <MenuHeader title="Desayunos y Brunch" />
             <div class="food-section">
-            <MenuItem
-                    className="food"
-                    title="BAGEL DE JAMÓN Y QUESO"
-                    imageSrc={BagelJamónQueso}
-                    imageAlt="Bagel de Jamón y Queso"
+                <MenuItem className="food" title="BAGEL DE JAMÓN Y QUESO"
+                    imageSrc={BagelJamónQueso} imageAlt="Bagel de Jamón y Queso"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="BAGEL DE QUESO CREMA"
-                    imageSrc={BagelQuesoCrema}
-                    imageAlt="Bagel de Queso Crema"
+                <MenuItem className="food" title="BAGEL DE QUESO CREMA"
+                    imageSrc={BagelQuesoCrema} imageAlt="Bagel de Queso Crema"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="BAGEL DE SALMÓN AHUMADO"
-                    imageSrc={BagelSalmónAhumado}
-                    imageAlt="Bagel de Salmón Ahumado"
+                <MenuItem className="food" title="BAGEL DE SALMÓN AHUMADO"
+                    imageSrc={BagelSalmónAhumado} imageAlt="Bagel de Salmón Ahumado"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="BENEDICTINOS"
-                    imageSrc={Benedictinos}
-                    imageAlt="Benedictinos"
+                <MenuItem className="food" title="BENEDICTINOS"
+                    imageSrc={Benedictinos} imageAlt="Benedictinos"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="BOWL DE AÇAI"
-                    imageSrc={BowlAçai}
-                    imageAlt="Bowl de Açai"
+                <MenuItem className="food" title="BOWL DE AÇAI"
+                    imageSrc={BowlAçai} imageAlt="Bowl de Açai"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="BOWL DE YOGURT"
-                    imageSrc={BowlYogurt}
-                    imageAlt="Bowl de Yogurt"
+                <MenuItem className="food" title="BOWL DE YOGURT"
+                    imageSrc={BowlYogurt} imageAlt="Bowl de Yogurt"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="BOWL DE QUINUA Y VEGETALES"
-                    imageSrc={BowlQuinuaVegetales}
-                    imageAlt="Bowl de Quinua y Vegetales"
+                <MenuItem className="food" title="BOWL DE QUINUA Y VEGETALES"
+                    imageSrc={BowlQuinuaVegetales} imageAlt="Bowl de Quinua y Vegetales"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="OMELETTE DE QUESO Y ESPINACAS"
-                    imageSrc={OmeletteQuesoEspinacas}
-                    imageAlt="Omelette de Queso y Espinacas"
+                <MenuItem className="food" title="OMELETTE DE QUESO Y ESPINACAS"
+                    imageSrc={OmeletteQuesoEspinacas} imageAlt="Omelette de Queso y Espinacas"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="PANCAKES"
-                    imageSrc={Pancakes}
-                    imageAlt="Pancakes"
+                <MenuItem className="food" title="PANCAKES"
+                    imageSrc={Pancakes} imageAlt="Pancakes"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="PANCAKES DE CHOCOLATE"
-                    imageSrc={PancakesChocolate}
-                    imageAlt="Pancakes de Chocolate"
+                <MenuItem className="food" title="PANCAKES DE CHOCOLATE"
+                    imageSrc={PancakesChocolate} imageAlt="Pancakes de Chocolate"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="SÁNDWICH DE CARNE Y QUESO"
-                    imageSrc={SándwichCarneQueso}
-                    imageAlt="Sándwich de Carne y Queso"
+                <MenuItem className="food" title="SÁNDWICH DE CARNE Y QUESO"
+                    imageSrc={SándwichCarneQueso} imageAlt="Sándwich de Carne y Queso"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="SÁNDWICH DE JAMÓN Y QUESO"
-                    imageSrc={SándwichJamónQueso}
-                    imageAlt="Sándwich de Jamón y Queso"
+                <MenuItem className="food" title="SÁNDWICH DE JAMÓN Y QUESO"
+                    imageSrc={SándwichJamónQueso} imageAlt="Sándwich de Jamón y Queso"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="SÁNDWICH DE PAVO Y AGUACATE"
-                    imageSrc={SándwichPavoAguacate}
-                    imageAlt="Sándwich de Pavo y Aguacate"
+                <MenuItem className="food" title="SÁNDWICH DE PAVO Y AGUACATE"
+                    imageSrc={SándwichPavoAguacate} imageAlt="Sándwich de Pavo y Aguacate"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="TORTILLA DE JAMÓN Y QUESO"
-                    imageSrc={TortillaJamónQueso}
-                    imageAlt="Tortilla de Jamón y Queso"
+                <MenuItem className="food" title="TORTILLA DE JAMÓN Y QUESO"
+                    imageSrc={TortillaJamónQueso} imageAlt="Tortilla de Jamón y Queso"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="TOSTADA DE AGUACATE"
-                    imageSrc={TostadaAguacate}
-                    imageAlt="Tostada de Aguacate"
+                <MenuItem className="food" title="TOSTADA DE AGUACATE"
+                    imageSrc={TostadaAguacate} imageAlt="Tostada de Aguacate"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="TOSTADAS FRANCESAS"
-                    imageSrc={TostadasFrancesas}
-                    imageAlt="Tostadas Francesas"
+                <MenuItem className="food" title="TOSTADAS FRANCESAS"
+                    imageSrc={TostadasFrancesas} imageAlt="Tostadas Francesas"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="TOSTADA DE JAMÓN Y QUESO"
-                    imageSrc={TostadaJamónQueso}
-                    imageAlt="Tostada de Jamón y Queso"
+                <MenuItem className="food" title="TOSTADA DE JAMÓN Y QUESO"
+                    imageSrc={TostadaJamónQueso} imageAlt="Tostada de Jamón y Queso"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="WAFFLES"
-                    imageSrc={Waffles}
-                    imageAlt="Waffles"
+                <MenuItem className="food" title="WAFFLES"
+                    imageSrc={Waffles} imageAlt="Waffles"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="WRAP CARNES Y MOZZARELLA"
-                    imageSrc={WrapCarnesMozzarella}
-                    imageAlt="Wrap Carnes y Mozzarella"
+                <MenuItem className="food" title="WRAP CARNES Y MOZZARELLA"
+                    imageSrc={WrapCarnesMozzarella} imageAlt="Wrap Carnes y Mozzarella"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="WRAP COSTILLITAS"
-                    imageSrc={WrapCostillitas}
-                    imageAlt="Wrap Costillitas"
+                <MenuItem className="food" title="WRAP COSTILLITAS"
+                    imageSrc={WrapCostillitas} imageAlt="Wrap Costillitas"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="WRAP HAWAIANO"
-                    imageSrc={WrapHawaiano}
-                    imageAlt="Wrap Hawaiano"
+                <MenuItem className="food" title="WRAP HAWAIANO"
+                    imageSrc={WrapHawaiano} imageAlt="Wrap Hawaiano"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="WRAP DE JAMÓN Y MOZZARELLA"
-                    imageSrc={WrapJamónMozzarella}
-                    imageAlt="Wrap de Jamón y Mozzarella"
+                <MenuItem className="food" title="WRAP DE JAMÓN Y MOZZARELLA"
+                    imageSrc={WrapJamónMozzarella} imageAlt="Wrap de Jamón y Mozzarella"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="WRAP DE POLLO"
-                    imageSrc={WrapPollo}
-                    imageAlt="Wrap de Pollo"
+                <MenuItem className="food" title="WRAP DE POLLO"
+                    imageSrc={WrapPollo} imageAlt="Wrap de Pollo"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="WRAP ROAST BEEF"
-                    imageSrc={WrapRoastBeef}
-                    imageAlt="Wrap Roast Beef"
+                <MenuItem className="food" title="WRAP ROAST BEEF"
+                    imageSrc={WrapRoastBeef} imageAlt="Wrap Roast Beef"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
-                <MenuItem
-                    className="food"
-                    title="WRAP TRADICIONAL DE RES"
-                    imageSrc={WrapTradicionalRes}
-                    imageAlt="Wrap Tradicional de Res"
+                <MenuItem className="food" title="WRAP TRADICIONAL DE RES"
+                    imageSrc={WrapTradicionalRes} imageAlt="Wrap Tradicional de Res"
                     // Link de detalles
                     detailsLink="/"
+                    price={4.99}
+                    onAddToCart={() => addToCart({ title: "AMERICANO", price: 4.99, image: Americano })} 
                 />
             </div>
         </>
