@@ -100,7 +100,7 @@ const SignUp = () => {
     };
 
     const validatePhone = (telefono) => {
-        const phonePattern = /^[0-9]{20}$/; 
+        const phonePattern = /^[0-9]{10}$/; 
         return phonePattern.test(telefono);
     };
 
