@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './AdminDashboard.css';
 import Navbar from '../../components/Navbar/Navbar';
 import axios from '../../config/axiosConfig';
+import PromocionesServices from '../../Services/PromocionesServices';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const AdminDashboard = () => {
     // Estado para la sección activa
@@ -24,33 +26,31 @@ const AdminDashboard = () => {
     };
 
     // Función para manejar cambios en los campos del formulario
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setPromotionData((prevState) => ({
-            ...prevState,
-            [name]: value
-        }));
-    };
+
 
    // Función para enviar el formulario
-   const handleSubmit = async (e) => {
+  
+    const [idPromociones, setIdPromociones] = useState('');
+    const [nombrePromo, setNombrePromo] = useState('');
+    const [descripcionPromo, setDescripcionPromo] = useState('');
+    const [fechaInicio, setFechaInicio] = useState('');
+    const [fechaFinal, setFechaFinal] = useState('');
+    const [tipoDescuento, setTipoDescuento] = useState=('');
+    const [valorDescuento, setValorDescuento] = useState('');
+    const [estado, setEstado] = useState('');
+    const navigate = useNavigate();
+    const {id} = useParams();
+
+    const savePromo = (e) => {
         e.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:8080/api/promociones/create', promotionData, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-            if (response.status === 200) {
-                alert('Promoción creada exitosamente');
-            } else {
-                alert('Error al crear promoción');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Error al crear promoción');
-        }
-    };
+        const promo = {idPromociones, nombrePromo, descripcionPromo, fechaInicio, fechaFinal, tipoDescuento, valorDescuento, estado };
+        PromocionesServices.createPromociones(promo).then((response) => {
+           console.log(response.data);
+           navigate('/AdminDashboard');
+        }).catch(error => {
+            console.log(error)
+        })
+    }
 
     return (
         <>
@@ -69,15 +69,15 @@ const AdminDashboard = () => {
                     {/* Promociones */}
                     <section id="promociones" className={`dashboard-section ${activeSection === 'promociones' ? '' : 'hidden'}`}>
                         <h2>Crear Promociones</h2>
-                        <form onSubmit={handleSubmit}>
+                        <form>
                             <div className="form-group">
                                 <label htmlFor="nombrePromo">Nombre de la Promoción:</label>
                                 <input
                                     type="text"
                                     id="nombrePromo" 
                                     name="nombrePromo" 
-                                    value={promotionData.nombrePromo} 
-                                    onChange={handleInputChange} 
+                                    value={nombrePromo} 
+                                    onChange={(e) => setNombrePromo(e.target.value)} 
                                     required />
                             </div>
                             <div className="form-group">
@@ -85,8 +85,8 @@ const AdminDashboard = () => {
                                 <textarea
                                     id="descripcionPromo" 
                                     name="descripcionPromo" 
-                                    value={promotionData.descripcionPromo} 
-                                    onChange={handleInputChange} 
+                                    value={descripcionPromo} 
+                                    onChange={(e) => setDescripcionPromo(e.target.value)} 
                                     required 
                                 />
                             </div>
@@ -96,8 +96,8 @@ const AdminDashboard = () => {
                                     type="datetime-local" 
                                     id="fechaInicio" 
                                     name="fechaInicio" 
-                                    value={promotionData.fechaInicio} 
-                                    onChange={handleInputChange} 
+                                    value={fechaInicio} 
+                                    onChange={(e) => setFechaInicio(e.target.value)}
                                     required 
                                 />
                             </div>
@@ -107,8 +107,8 @@ const AdminDashboard = () => {
                                     type="datetime-local" 
                                     id="fechaFinal" 
                                     name="fechaFinal" 
-                                    value={promotionData.fechaFinal} 
-                                    onChange={handleInputChange} 
+                                    value={fechaFinal} 
+                                    onChange={(e) => setFechaFinal(e.target.value)}
                                     required 
                                 />
                             </div>
@@ -117,8 +117,8 @@ const AdminDashboard = () => {
                                 <select
                                     id="tipoDescuento" 
                                     name="tipoDescuento" 
-                                    value={promotionData.tipoDescuento} 
-                                    onChange={handleInputChange} 
+                                    value={tipoDescuento} 
+                                    onChange={(e) => setTipoDescuento(e.target.value)} 
                                     required
                                 >
                                     <option value="porCantidad">Descuento por Cantidad</option>
@@ -134,8 +134,8 @@ const AdminDashboard = () => {
                                     type="number" 
                                     id="valorDescuento" 
                                     name="valorDescuento" 
-                                    value={promotionData.valorDescuento} 
-                                    onChange={handleInputChange} 
+                                    value={valorDescuento} 
+                                    onChange={(e) => setValorDescuento(e.target.value)}
                                     step="0.01" 
                                     min="0" 
                                     required 
@@ -146,8 +146,8 @@ const AdminDashboard = () => {
                                 <select
                                     id="estado" 
                                     name="estado" 
-                                    value={promotionData.estado} 
-                                    onChange={handleInputChange} 
+                                    value={estado} 
+                                    onChange={(e) => setEstado(e.target.value)}
                                     required
                                 >
                                     <option value="activa">Activa</option>
@@ -156,7 +156,7 @@ const AdminDashboard = () => {
                                     <option value="suspendida">Suspendida</option>
                                 </select>
                             </div>
-                            <button
+                            <button onClick={(e) => savePromo(e)}
                                 type="submit" className="btn-submit">Crear Promoción</button>
                         </form>
                     </section>
