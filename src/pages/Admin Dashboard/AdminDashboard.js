@@ -59,11 +59,10 @@ const AdminDashboard = () => {
     const [descripcionProducto, setDescripcionProducto] = useState('');
     const [precio, setPrecio] = useState('');
     const [tipoProducto, setTipoProducto] = useState('');
-    const [capacidadMesa, setCapacidadMesa] = useState('');
 
     const saveProducto = (e) => {
         e.preventDefault();
-        const Producto = {idProductos, nombreProducto, descripcionProducto, precio, tipoProducto, capacidadMesa};
+        const Producto = {idProductos, nombreProducto, descripcionProducto, precio, tipoProducto};
         ProductoServices.createProducto(Producto).then((response) => {
            console.log(response.data);
            navigate('/AdminDashboard');

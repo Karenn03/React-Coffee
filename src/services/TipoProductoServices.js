@@ -4,19 +4,19 @@ const url = 'http://localhost:8080/api/tiposProducto';
 
 class TipoProductoServices{
 
-    getAllRoles(){
+    getAllTiposProducto(){
     return axios.get(url + "/all");
     }
 
-    createRoles(tipoProducto){
+    createTipoProducto(tipoProducto){
         return axios.post(url + "/create" ,tipoProducto);
     }
 
-    updateRoles(tipoProductoId){
+    updateTipoProducto(tipoProductoId){
         return axios.get(url + '/update/' + tipoProductoId);
     }
 
-    getRolesById(tipoProductoId){
+    getTipoProductoById(tipoProductoId){
         return axios.get(url + '/' + tipoProductoId);
     }
 }
