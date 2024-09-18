@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AdminDashboard.css';
 import Navbar from '../../components/Navbar/Navbar';
 
@@ -6,6 +6,7 @@ import PromocionesServices from '../../services/PromocionesServices';
 import RolesServices from '../../services/RolesServices';
 import ProductoServices from '../../services/ProductoServices';
 import TipoProductoServices from '../../services/TipoProductoServices';
+import MesasServices from '../../services/MesasServices';
 
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -29,7 +30,7 @@ const AdminDashboard = () => {
         setActiveSection(sectionId);
     };
 
-   // Función para enviar el formulario (promociones)
+    // Función para enviar el formulario (promociones)
     const [idPromociones, setIdPromociones] = useState('');
     const [nombrePromo, setNombrePromo] = useState('');
     const [descripcionPromo, setDescripcionPromo] = useState('');
@@ -90,10 +91,25 @@ const AdminDashboard = () => {
     const [idTipoProducto, setIdTipoProducto] = useState('');
     const [nombreTipoProducto, setNombreTipoProducto] = useState('');
    
-   const saveTipoProducto = (e) => {
+    const saveTipoProducto = (e) => {
         e.preventDefault();
         const tipoProducto = {idTipoProducto, nombreTipoProducto};
         TipoProductoServices.createTipoProducto(tipoProducto).then((response) => {
+            console.log(response.data);
+            navigate('/AdminDashboard');
+        }).catch(error => {
+           console.log(error)
+        })
+    }
+
+    // Función para enviar el formulario (mesas)
+    const [idMesas, setIdMesas] = useState('');
+    const [capacidad, setCapacidad] = useState('');
+       
+    const saveMesa = (e) => {
+        e.preventDefault();
+        const mesa = {idMesas, capacidad};
+        MesasServices.createMesa(mesa).then((response) => {
             console.log(response.data);
             navigate('/AdminDashboard');
         }).catch(error => {
@@ -170,11 +186,11 @@ const AdminDashboard = () => {
                                     onChange={(e) => setTipoDescuento(e.target.value)} 
                                     required
                                 >
-                                    <option value="porCantidad">Descuento por Cantidad</option>
-                                    <option value="porTemporada">Descuento por Temporada</option>
-                                    <option value="porFidelidad">Descuento por Fidelidad</option>
-                                    <option value="deLanzamiento">Descuento de Lanzamiento</option>
-                                    <option value="porCompraMínima">Descuento por Compra Mínima</option>
+                                    <option value="Descuento_por_Cantidad">Descuento por Cantidad</option>
+                                    <option value="Descuento_por_Temporada">Descuento por Temporada</option>
+                                    <option value="Descuento_por_Fidelidad">Descuento por Fidelidad</option>
+                                    <option value="Descuento_de_Lanzamiento">Descuento de Lanzamiento</option>
+                                    <option value="Descuento_por_Compra_Mínima">Descuento por Compra Mínima</option>
                                 </select>
                             </div>
                             <div className="form-group">
@@ -336,7 +352,7 @@ const AdminDashboard = () => {
                                 </select>
                             </div>
                             */}
-                            <button
+                            <button onClick={(e) => saveMesa(e)}
                                 type="submit" className="btn-submit">Crear Mesa</button>
                         </form>
                     </section>

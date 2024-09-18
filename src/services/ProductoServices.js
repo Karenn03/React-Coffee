@@ -4,19 +4,19 @@ const url = 'http://localhost:8080/api/productos';
 
 class ProductosServices{
 
-    getAllPromociones(){
+    getAllProductos(){
     return axios.get(url + "/all");
     }
 
-    createPromociones(productos){
+    createProducto(productos){
         return axios.post(url + "/create" ,productos);
     }
 
-    updatePromociones(productosId){
+    updateProducto(productosId){
         return axios.get(url + '/update/' + productosId);
     }
 
-    getPromocionesById(productosId){
+    getProductoById(productosId){
         return axios.get(url + '/' + productosId);
     }
 }

@@ -19,6 +19,7 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     position: relative;
+    margin-top: 75px;
 }
 
 .registration-section::before {
