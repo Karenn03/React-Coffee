@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import './AdminDashboard.css';
 import Navbar from '../../components/Navbar/Navbar';
-import axios from '../../config/axiosConfig';
+
+import PromocionesServices from '../../services/PromocionesServices';
+import RolesServices from '../../services/RolesServices';
+import ProductoServices from '../../services/ProductoServices';
+import TipoProductoServices from '../../services/TipoProductoServices';
+
+import { useNavigate, useParams } from 'react-router-dom';
 
 const AdminDashboard = () => {
     // Estado para la sección activa
@@ -23,34 +29,77 @@ const AdminDashboard = () => {
         setActiveSection(sectionId);
     };
 
-    // Función para manejar cambios en los campos del formulario
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setPromotionData((prevState) => ({
-            ...prevState,
-            [name]: value
-        }));
-    };
+   // Función para enviar el formulario (promociones)
+    const [idPromociones, setIdPromociones] = useState('');
+    const [nombrePromo, setNombrePromo] = useState('');
+    const [descripcionPromo, setDescripcionPromo] = useState('');
+    const [fechaInicio, setFechaInicio] = useState('');
+    const [fechaFinal, setFechaFinal] = useState('');
+    const [tipoDescuento, setTipoDescuento] = useState('');
+    const [valorDescuento, setValorDescuento] = useState('');
+    const [estado, setEstado] = useState('');
+    const navigate = useNavigate();
+    const {id} = useParams();
 
-   // Función para enviar el formulario
-   const handleSubmit = async (e) => {
+    const savePromo = (e) => {
         e.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:8080/api/promociones/create', promotionData, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-            if (response.status === 200) {
-                alert('Promoción creada exitosamente');
-            } else {
-                alert('Error al crear promoción');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Error al crear promoción');
-        }
-    };
+        const promo = {idPromociones, nombrePromo, descripcionPromo, fechaInicio, fechaFinal, tipoDescuento, valorDescuento, estado };
+        PromocionesServices.createPromociones(promo).then((response) => {
+           console.log(response.data);
+           navigate('/AdminDashboard');
+        }).catch(error => {
+            console.log(error)
+        })
+    }
+
+    // Función para enviar el formulario (productos)
+    const [idProductos, setIdProductos] = useState('');
+    const [nombreProducto, setNombreProducto] = useState('');
+    const [descripcionProducto, setDescripcionProducto] = useState('');
+    const [precio, setPrecio] = useState('');
+    const [tipoProducto, setTipoProducto] = useState('');
+    const [capacidadMesa, setCapacidadMesa] = useState('');
+
+    const saveProducto = (e) => {
+        e.preventDefault();
+        const Producto = {idProductos, nombreProducto, descripcionProducto, precio, tipoProducto, capacidadMesa};
+        ProductoServices.createProducto(Producto).then((response) => {
+           console.log(response.data);
+           navigate('/AdminDashboard');
+         }).catch(error => {
+             console.log(error)
+        })
+     }
+
+    // Función para enviar el formulario (roles)
+    const [idRoles, setIdRoles] = useState('');
+    const [nombreRol, setNombreRol] = useState('');
+   
+    const saveRol = (e) => {
+       e.preventDefault();
+       const rol = {idRoles, nombreRol};
+        RolesServices.createRoles(rol).then((response) => {
+          console.log(response.data);
+          navigate('/AdminDashboard');
+        }).catch(error => {
+            console.log(error)
+       })
+    }
+
+    // Función para enviar el formulario (tipo productos)
+    const [idTipoProducto, setIdTipoProducto] = useState('');
+    const [nombreTipoProducto, setNombreTipoProducto] = useState('');
+   
+   const saveTipoProducto = (e) => {
+        e.preventDefault();
+        const tipoProducto = {idTipoProducto, nombreTipoProducto};
+        TipoProductoServices.createTipoProducto(tipoProducto).then((response) => {
+            console.log(response.data);
+            navigate('/AdminDashboard');
+        }).catch(error => {
+           console.log(error)
+        })
+    }
 
     return (
         <>
@@ -69,15 +118,15 @@ const AdminDashboard = () => {
                     {/* Promociones */}
                     <section id="promociones" className={`dashboard-section ${activeSection === 'promociones' ? '' : 'hidden'}`}>
                         <h2>Crear Promociones</h2>
-                        <form onSubmit={handleSubmit}>
+                        <form>
                             <div className="form-group">
                                 <label htmlFor="nombrePromo">Nombre de la Promoción:</label>
                                 <input
                                     type="text"
                                     id="nombrePromo" 
                                     name="nombrePromo" 
-                                    value={promotionData.nombrePromo} 
-                                    onChange={handleInputChange} 
+                                    value={nombrePromo} 
+                                    onChange={(e) => setNombrePromo(e.target.value)} 
                                     required />
                             </div>
                             <div className="form-group">
@@ -85,8 +134,8 @@ const AdminDashboard = () => {
                                 <textarea
                                     id="descripcionPromo" 
                                     name="descripcionPromo" 
-                                    value={promotionData.descripcionPromo} 
-                                    onChange={handleInputChange} 
+                                    value={descripcionPromo} 
+                                    onChange={(e) => setDescripcionPromo(e.target.value)} 
                                     required 
                                 />
                             </div>
@@ -96,8 +145,8 @@ const AdminDashboard = () => {
                                     type="datetime-local" 
                                     id="fechaInicio" 
                                     name="fechaInicio" 
-                                    value={promotionData.fechaInicio} 
-                                    onChange={handleInputChange} 
+                                    value={fechaInicio} 
+                                    onChange={(e) => setFechaInicio(e.target.value)}
                                     required 
                                 />
                             </div>
@@ -107,8 +156,8 @@ const AdminDashboard = () => {
                                     type="datetime-local" 
                                     id="fechaFinal" 
                                     name="fechaFinal" 
-                                    value={promotionData.fechaFinal} 
-                                    onChange={handleInputChange} 
+                                    value={fechaFinal} 
+                                    onChange={(e) => setFechaFinal(e.target.value)}
                                     required 
                                 />
                             </div>
@@ -117,8 +166,8 @@ const AdminDashboard = () => {
                                 <select
                                     id="tipoDescuento" 
                                     name="tipoDescuento" 
-                                    value={promotionData.tipoDescuento} 
-                                    onChange={handleInputChange} 
+                                    value={tipoDescuento} 
+                                    onChange={(e) => setTipoDescuento(e.target.value)} 
                                     required
                                 >
                                     <option value="porCantidad">Descuento por Cantidad</option>
@@ -134,8 +183,8 @@ const AdminDashboard = () => {
                                     type="number" 
                                     id="valorDescuento" 
                                     name="valorDescuento" 
-                                    value={promotionData.valorDescuento} 
-                                    onChange={handleInputChange} 
+                                    value={valorDescuento} 
+                                    onChange={(e) => setValorDescuento(e.target.value)}
                                     step="0.01" 
                                     min="0" 
                                     required 
@@ -146,8 +195,8 @@ const AdminDashboard = () => {
                                 <select
                                     id="estado" 
                                     name="estado" 
-                                    value={promotionData.estado} 
-                                    onChange={handleInputChange} 
+                                    value={estado} 
+                                    onChange={(e) => setEstado(e.target.value)}
                                     required
                                 >
                                     <option value="activa">Activa</option>
@@ -156,7 +205,7 @@ const AdminDashboard = () => {
                                     <option value="suspendida">Suspendida</option>
                                 </select>
                             </div>
-                            <button
+                            <button onClick={(e) => savePromo(e)}
                                 type="submit" className="btn-submit">Crear Promoción</button>
                         </form>
                     </section>
@@ -166,49 +215,76 @@ const AdminDashboard = () => {
                         <h2>Crear Roles</h2>
                         <form>
                             <div className="form-group">
-                                <label htmlFor="nombre-rol">Nombre del Rol:</label>
+                                <label htmlFor="nombreRol">Nombre del Rol:</label>
                                 <input
                                     type="text"
-                                    id="nombre-rol" name="nombre-rol" required />
+                                    id="nombreRol"
+                                    name="nombreRol"
+                                    value={nombreRol} 
+                                    onChange={(e) => setNombreRol(e.target.value)} 
+                                    required
+                                />
                             </div>
-                            <button
+                            <button onClick={(e) => saveRol(e)}
                                 type="submit" className="btn-submit">Crear Rol</button>
                         </form>
                     </section>
                     {/* Productos */}
                     <section
-                    id="productos" className={`dashboard-section ${activeSection === 'productos' ? '' : 'hidden'}`}>
+                        id="productos" className={`dashboard-section ${activeSection === 'productos' ? '' : 'hidden'}`}>
                         <h2>Crear Productos</h2>
                         <form>
                             <div className="form-group">
-                                <label htmlFor="nombre-producto">Nombre del Producto:</label>
+                                <label htmlFor="nombreProducto">Nombre del Producto:</label>
                                 <input
                                     type="text"
-                                    id="nombre-producto" name="nombre-producto" required />
+                                    id="nombreProducto"
+                                    name="nombreProducto"
+                                    value={nombreProducto} 
+                                    onChange={(e) => setNombreProducto(e.target.value)} 
+                                    required 
+                                />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="descripcion-producto">Descripción:</label>
+                                <label htmlFor="descripcionProducto">Descripción:</label>
                                 <input
                                     type="text"
-                                    id="descripcion-producto" name="descripcion-producto" required />
+                                    id="descripcionProducto"
+                                    name="descripcionProducto"
+                                    value={descripcionProducto} 
+                                    onChange={(e) => setDescripcionProducto(e.target.value)} 
+                                    required
+                                />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="precio">Precio:</label>
                                 <input
                                     type="number"
-                                    id="precio" name="precio" step="0.01" min={0} required />
+                                    id="precio"
+                                    name="precio"
+                                    value={precio} 
+                                    onChange={(e) => setPrecio(e.target.value)} 
+                                    step="0.01"
+                                    min={0}
+                                    required
+                                />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="tipo-producto">Tipo de Producto:</label>
+                                <label htmlFor="tipoProducto">Tipo de Producto:</label>
                                 <select
-                                id="tipo-producto" name="tipo-producto" required>
+                                    id="tipoProducto"
+                                    name="tipoProducto"
+                                    value={tipoProducto} 
+                                    onChange={(e) => setTipoProducto(e.target.value)} 
+                                    required
+                                >
                                     <option value="bebidasCalientes">Bebidas Calientes</option>
                                     <option value="bebidasFrias">Bebidas Frías</option>
                                     <option value="panaderiaPasteleria">Panadería y Pastelería</option>
                                     <option value="desayunosBrunch">Desayunos y Brunch</option>
                                 </select>
                             </div>
-                            <button
+                            <button onClick={(e) => saveProducto(e)}
                                 type="submit" className="btn-submit">Crear Producto</button>
                         </form>
                     </section>
@@ -218,12 +294,17 @@ const AdminDashboard = () => {
                         <h2>Crear Tipos de Productos</h2>
                         <form>
                             <div className="form-group">
-                                <label htmlFor="nombre-tipo-producto">Nombre del Tipo de Producto:</label>
+                                <label htmlFor="nombreTipoProducto">Nombre del Tipo de Producto:</label>
                                 <input
                                     type="text"
-                                    id="nombre-tipo-producto" name="nombre-tipo-producto" required />
+                                    id="nombreTipoProducto"
+                                    name="nombreTipoProducto"
+                                    value={nombreTipoProducto} 
+                                    onChange={(e) => setNombreTipoProducto(e.target.value)} 
+                                    required
+                                />
                             </div>
-                            <button
+                            <button onClick={(e) => saveTipoProducto(e)}
                                 type="submit" className="btn-submit">Crear Tipo de Producto</button>
                         </form>
                     </section>
@@ -233,10 +314,15 @@ const AdminDashboard = () => {
                         <h2>Crear Mesas</h2>
                         <form>
                             <div className="form-group">
-                                <label htmlFor="capacidad-mesa">Capacidad:</label>
+                                <label htmlFor="capacidadMesa">Capacidad:</label>
                                 <input
                                     type="number"
-                                    id="capacidad-mesa" name="capacidad-mesa" required />
+                                    id="capacidadMesa"
+                                    name="capacidadMesa"
+                                    value={capacidadMesa} 
+                                    onChange={(e) => setCapacidadMesa(e.target.value)} 
+                                    required
+                                />
                             </div>
                             {/*
                             <div className="form-group">
