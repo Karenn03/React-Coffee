@@ -12,12 +12,16 @@ class TipoProductoServices{
         return axios.post(url + "/create" ,tipoProducto);
     }
 
-    updateTipoProducto(tipoProductoId){
-        return axios.get(url + '/update/' + tipoProductoId);
+    updateTipoProducto(tipoProductoId, tipoProducto){
+        return axios.get(url + '/update/' + tipoProductoId, tipoProducto);
     }
 
     getTipoProductoById(tipoProductoId){
         return axios.get(url + '/' + tipoProductoId);
+    }
+
+    deleteTipoProducto(tipoProductoId){
+        return axios.delete(url + "/delete/" + tipoProductoId)
     }
 }
 

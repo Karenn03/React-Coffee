@@ -12,12 +12,16 @@ class MesasServices{
         return axios.post(url + "/create" ,mesa);
     }
 
-    updateMesa(mesaId){
-        return axios.get(url + '/update/' + mesaId);
+    updateMesa(mesaId, mesa){
+        return axios.get(url + '/update/' + mesaId, mesa);
     }
 
     getMesaById(mesaId){
         return axios.get(url + '/' + mesaId);
+    }
+
+    deleteMesa(mesaId){
+        return axios.delete(url + "/delete/" + mesaId)
     }
 }
 

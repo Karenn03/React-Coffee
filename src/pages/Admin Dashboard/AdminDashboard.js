@@ -10,9 +10,6 @@ import MesasServices from '../../services/MesasServices';
 
 import { useNavigate, useParams } from 'react-router-dom';
 
-let promociones = [];
-let setPromociones;
-
 const AdminDashboard = () => {
     // Estado para la sección activa
     const [activeSection, setActiveSection] = useState('promociones');
@@ -22,106 +19,310 @@ const AdminDashboard = () => {
         setActiveSection(sectionId);
     };
 
-    const promocionesArray = Array.isArray(promociones) ? promociones : [];
-
     // Función para enviar el formulario (promociones)
+    const [promociones, setPromociones] = useState([]);
     const [idPromociones, setIdPromociones] = useState('');
     const [nombrePromo, setNombrePromo] = useState('');
     const [descripcionPromo, setDescripcionPromo] = useState('');
     const [fechaInicio, setFechaInicio] = useState('');
     const [fechaFinal, setFechaFinal] = useState('');
-    const [tipoDescuento, setTipoDescuento] = useState('Descuento_por_Cantidad');
+    const [tipoDescuento, setTipoDescuento] = useState('');
     const [valorDescuento, setValorDescuento] = useState(0);
     const [estado, setEstado] = useState('activa');
     const navigate = useNavigate();
     const { id } = useParams();
 
-    // Función para cargar las promociones al montar el componente
     useEffect(() => {
-        obtenerPromociones();
-    }, [promociones]);
+        PromocionesServices.getAllPromociones().then(response => {
+            console.log('Response data:', response.data);
+            if (Array.isArray(response.data)) {
+                setPromociones(response.data);
+            } else {
+                console.error('La respuesta no es un array:', response.data);
+                setPromociones([]);
+            }
+        }).catch(error => {
+            console.log(error);
+            setPromociones([]); 
+        });
+    }, []);
     
-    const obtenerPromociones = () => {
-        PromocionesServices.getAllPromociones().then((response) => {
-            setPromociones(response.data);
+    const savePromo = (e) => {
+        e.preventDefault();
+        const promo = { idPromociones, nombrePromo, descripcionPromo, fechaInicio, fechaFinal, tipoDescuento, valorDescuento, estado };
+    
+        if (idPromociones) {
+            PromocionesServices.updatePromociones(idPromociones, promo).then((response) => {
+                const updatedPromociones = promociones.map(p => (p.idPromociones === idPromociones ? response.data : p));
+                setPromociones(updatedPromociones);
+                navigate('/AdminDashboard');
+            }).catch(error => {
+                console.log(error);
+            });
+        } else {
+            PromocionesServices.createPromociones(promo).then((response) => {
+                setPromociones(prev => [...prev, response.data]);
+                navigate('/AdminDashboard');
+            }).catch(error => {
+                console.log(error);
+            });
+        }
+    };
+    
+    const deletePromo = (id) => {
+        PromocionesServices.deletePromocion(id).then(() => {
+            setPromociones(promociones.filter(p => p.idPromociones !== id));
         }).catch(error => {
             console.log(error);
         });
     };
-
-    const savePromo = (e) => {
-        e.preventDefault();
-        const promo = {idPromociones, nombrePromo, descripcionPromo, fechaInicio, fechaFinal, tipoDescuento, valorDescuento, estado };
-        PromocionesServices.createPromociones(promo).then((response) => {
-           console.log(response.data);
-           navigate('/AdminDashboard');
-        }).catch(error => {
-            console.log(error)
-        })
-    }
+    
+    const editPromo = (promo) => {
+        setIdPromociones(promo.idPromociones);
+        setNombrePromo(promo.nombrePromo);
+        setDescripcionPromo(promo.descripcionPromo);
+        setFechaInicio(promo.fechaInicio);
+        setFechaFinal(promo.fechaFinal);
+        setTipoDescuento(promo.tipoDescuento);
+        setValorDescuento(promo.valorDescuento);
+        setEstado(promo.estado);
+        setActiveSection('promociones');
+    };
 
     // Función para enviar el formulario (productos)
+    const [productos, setProductos] = useState([]);
     const [idProductos, setIdProductos] = useState('');
     const [nombreProducto, setNombreProducto] = useState('');
     const [descripcionProducto, setDescripcionProducto] = useState('');
     const [precio, setPrecio] = useState('');
     const [idTipoProductoProducto, setIdTipoProductoProducto] = useState('');
 
+    useEffect(() => {
+        ProductoServices.getAllProductos().then(response => {
+            console.log('Response data:', response.data);
+            if (Array.isArray(response.data)) {
+                setProductos(response.data);
+            } else {
+                console.error('La respuesta no es un array:', response.data);
+                setProductos([]);
+            }
+        }).catch(error => {
+            console.log(error);
+            setProductos([]);
+        });
+    }, []);
+
     const saveProducto = (e) => {
         e.preventDefault();
-        const Producto = {idProductos, nombreProducto, descripcionProducto, precio, idTipoProductoProducto};
-        ProductoServices.createProducto(Producto).then((response) => {
-           console.log(response.data);
-           navigate('/AdminDashboard');
-         }).catch(error => {
-             console.log(error)
-        })
-     }
+        const producto = { idProductos, nombreProducto, descripcionProducto, precio, idTipoProductoProducto };
+    
+        if (idProductos) {
+            ProductoServices.updateProducto(idProductos, producto).then((response) => {
+                console.log('Producto actualizado:', response.data);
+                const updatedProductos = productos.map(p => (p.idProductos === idProductos ? response.data : p));
+                setProductos(updatedProductos);
+                navigate('/AdminDashboard');
+            }).catch(error => {
+                console.log(error);
+            });
+        } else {
+            ProductoServices.createProducto(producto).then((response) => {
+                console.log('Producto creado:', response.data);
+                setProductos(prev => [...prev, response.data]);
+                navigate('/AdminDashboard');
+            }).catch(error => {
+                console.log(error);
+            });
+        }
+    };
+    
+    const deleteProducto = (id) => {
+        ProductoServices.deleteProducto(id).then(() => {
+            setProductos(productos.filter(p => p.idProductos !== id));
+        }).catch(error => {
+            console.log(error);
+        });
+    };
+
+    const editProducto = (producto) => {
+        setIdProductos(producto.idProductos);
+        setNombreProducto(producto.nombreProducto);
+        setDescripcionProducto(producto.descripcionProducto);
+        setPrecio(producto.precio);
+        setIdTipoProductoProducto(producto.idTipoProductoProducto);
+    };
 
     // Función para enviar el formulario (roles)
+    const [roles, setRoles] = useState([]);
     const [idRoles, setIdRoles] = useState('');
     const [nombreRol, setNombreRol] = useState('');
    
-    const saveRol = (e) => {
-       e.preventDefault();
-       const rol = {idRoles, nombreRol};
-        RolesServices.createRoles(rol).then((response) => {
-          console.log(response.data);
-          navigate('/AdminDashboard');
+    useEffect(() => {
+        RolesServices.getAllRoles().then(response => {
+            console.log('Response data:', response.data);
+            if (Array.isArray(response.data)) {
+                setRoles(response.data);
+            } else {
+                console.error('La respuesta no es un array:', response.data);
+                setRoles([]);
+            }
         }).catch(error => {
-            console.log(error)
-       })
-    }
+            console.log(error);
+            setRoles([]); 
+        });
+    }, []);
+
+    const saveRol = (e) => {
+        e.preventDefault();
+        const rol = { idRoles, nombreRol };
+    
+        if (idRoles) {
+            RolesServices.updateRol(idRoles, rol).then((response) => {
+                const updatedRoles = roles.map(r => (r.idRoles === idRoles ? response.data : r));
+                setRoles(updatedRoles);
+                navigate('/AdminDashboard');
+            }).catch(error => {
+                console.log(error);
+            });
+        } else {
+            RolesServices.createRoles(rol).then((response) => {
+                setRoles(prev => [...prev, response.data]);
+                navigate('/AdminDashboard');
+            }).catch(error => {
+                console.log(error);
+            });
+        }
+    };
+
+    const deleteRol = (id) => {
+        RolesServices.deleteRol(id).then(() => {
+            setRoles(roles.filter(r => r.idRoles !== id));
+        }).catch(error => {
+            console.log(error);
+        });
+    };
+    
+    const editRol = (rol) => {
+        setIdRoles(rol.idRoles);
+        setNombreRol(rol.nombreRol);
+        setActiveSection('roles');
+    };
 
     // Función para enviar el formulario (tipo productos)
+    const [tiposProducto, setTiposProducto] = useState([]);
     const [idTipoProducto, setIdTipoProducto] = useState('');
     const [nombreTipoProducto, setNombreTipoProducto] = useState('');
    
+    useEffect(() => {
+        TipoProductoServices.getAllTiposProducto().then(response => {
+            console.log('Response data:', response.data);
+            if (Array.isArray(response.data)) {
+                setTiposProducto(response.data);
+            } else {
+                console.error('La respuesta no es un array:', response.data);
+                setTiposProducto([]);
+            }
+        }).catch(error => {
+            console.log(error);
+            setTiposProducto([]);
+        });
+    }, []);
+    
     const saveTipoProducto = (e) => {
         e.preventDefault();
-        const tipoProducto = {idTipoProducto, nombreTipoProducto};
-        TipoProductoServices.createTipoProducto(tipoProducto).then((response) => {
-            console.log(response.data);
-            navigate('/AdminDashboard');
+        const tipoProducto = { idTipoProducto, nombreTipoProducto };
+    
+        if (idTipoProducto) {
+            TipoProductoServices.updateTipoProducto(idTipoProducto, tipoProducto).then((response) => {
+                console.log('Tipo actualizado:', response.data);
+                const updatedTiposProducto = tiposProducto.map(tp => (tp.idTipoProducto === idTipoProducto ? response.data : tp));
+                setTiposProducto(updatedTiposProducto);
+                navigate('/AdminDashboard');
+            }).catch(error => {
+                console.log(error);
+            });
+        } else {
+            TipoProductoServices.createTipoProducto(tipoProducto).then((response) => {
+                console.log('Tipo creado:', response.data);
+                setTiposProducto(prev => [...prev, response.data]);
+                navigate('/AdminDashboard');
+            }).catch(error => {
+                console.log(error);
+            });
+        }
+    };
+    
+    const deleteTipoProducto = (id) => {
+        TipoProductoServices.deleteTipoProducto(id).then(() => {
+            setTiposProducto(tiposProducto.filter(r => r.idTipoProducto !== id));
         }).catch(error => {
-           console.log(error)
-        })
-    }
+            console.log(error);
+        });
+    };
+
+    const editTipoProducto = (tipoProducto) => {
+        setIdTipoProducto(tipoProducto.idTipoProducto);
+        setNombreTipoProducto(tipoProducto.nombreTipoProducto);
+        setActiveSection('tiposProducto');
+    };
 
     // Función para enviar el formulario (mesas)
+    const [mesas, setMesas] = useState([]);
     const [idMesas, setIdMesas] = useState('');
     const [capacidad, setCapacidad] = useState('');
-       
+    
+    useEffect(() => {
+        MesasServices.getAllMesas().then(response => {
+            console.log('Response data:', response.data);
+            if (Array.isArray(response.data)) {
+                setMesas(response.data);
+            } else {
+                console.error('La respuesta no es un array:', response.data);
+                setMesas([]);
+            }
+        }).catch(error => {
+            console.log(error);
+            setMesas([]);
+        });
+    }, []);
+
     const saveMesa = (e) => {
         e.preventDefault();
-        const mesa = {idMesas, capacidad};
-        MesasServices.createMesa(mesa).then((response) => {
-            console.log(response.data);
-            navigate('/AdminDashboard');
+        const mesa = { idMesas, capacidad };
+    
+        if (idMesas) {
+            MesasServices.updateMesa(idMesas, mesa).then((response) => {
+                console.log('Mesa actualizada:', response.data);
+                const updatedMesas = mesas.map(m => (m.idMesas === idMesas ? response.data : m));
+                setMesas(updatedMesas);
+                navigate('/AdminDashboard');
+            }).catch(error => {
+                console.log(error);
+            });
+        } else {
+            MesasServices.createMesa(mesa).then((response) => {
+                console.log('Mesa creada:', response.data);
+                setMesas(prev => [...prev, response.data]);
+                navigate('/AdminDashboard');
+            }).catch(error => {
+                console.log(error);
+            });
+        }
+    };
+
+    const deleteMesa = (id) => {
+        MesasServices.deleteMesa(id).then(() => {
+            setMesas(mesas.filter(m => m.idMesas !== id));
         }).catch(error => {
-           console.log(error)
-        })
-    }
+            console.log(error);
+        });
+    };
+    
+    const editMesa = (mesa) => {
+        setIdMesas(mesa.idMesas);
+        setCapacidad(mesa.capacidad);
+        setActiveSection('mesas');
+    };
 
     return (
         <>
@@ -242,13 +443,14 @@ const AdminDashboard = () => {
                                 <th scope="col">Tipo Descuento</th>
                                 <th scope="col">Valor Descuento</th>
                                 <th scope="col">Estado</th>
+                                <th scope='col'></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    promocionesArray.map((promocion) =>(
+                                    promociones.map((promocion, index) =>(
                                         <tr key={promocion.idPromociones}>
-                                            <td>{promocion.idPromociones}</td>
+                                            <td>{index + 1}</td>
                                             <td>{promocion.nombrePromo}</td>
                                             <td>{promocion.descripcionPromo}</td>
                                             <td>{promocion.fechaInicio}</td>
@@ -256,11 +458,15 @@ const AdminDashboard = () => {
                                             <td>{promocion.tipoDescuento}</td>
                                             <td>{promocion.valorDescuento}</td>
                                             <td>{promocion.estado}</td>
+                                            <td>
+                                                <button type="button" className="btn btn-danger" onClick={() => deletePromo(promocion.idPromociones)}>Eliminar</button>
+                                                <button type="button" className="btn btn-warning" onClick={() => editPromo(promocion)}>Editar</button>
+                                            </td>
                                         </tr>
                                     ))
                                 }
                             </tbody>
-                            </table>
+                        </table>
 
                     </section>
                     {/* Roles */}
@@ -282,6 +488,31 @@ const AdminDashboard = () => {
                             <button onClick={(e) => saveRol(e)}
                                 type="submit" className="btn-submit">Crear Rol</button>
                         </form>
+
+                        <table class="table-secondary">
+                            <thead>
+                                <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nombre del rol</th>
+                                <th scope='col'></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    roles.map((rol, index) =>(
+                                        <tr key={rol.idRoles}>
+                                            <td>{index + 1}</td>
+                                            <td>{rol.nombreRol}</td>
+                                            <td>
+                                                <button type="button" className="btn btn-danger" onClick={() => deleteRol(rol.idRoles)}>Eliminar</button>
+                                                <button type="button" className="btn btn-warning" onClick={() => editRol(rol)}>Editar</button>
+                                            </td>
+                                        </tr>
+                                    ))
+                                }
+                            </tbody>
+                        </table>
+
                     </section>
                     {/* Productos */}
                     <section
@@ -341,6 +572,36 @@ const AdminDashboard = () => {
                             <button onClick={(e) => saveProducto(e)}
                                 type="submit" className="btn-submit">Crear Producto</button>
                         </form>
+                        
+                        <table class="table-secondary">
+                            <thead>
+                                <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Tipo Producto</th>
+                                <th scope='col'></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    productos.map(producto => (
+                                        <tr key={producto.idProductos}>
+                                            <td>{producto.nombreProducto}</td>
+                                            <td>{producto.descripcionProducto}</td>
+                                            <td>{producto.precio}</td>
+                                            <td>{producto.idTipoProductoProducto}</td>
+                                            <td>
+                                                <button onClick={() => editProducto(producto)}>Editar</button>
+                                                <button onClick={() => deleteProducto(producto.idProductos)}>Eliminar</button>
+                                            </td>
+                                        </tr>
+                                    ))
+                                }
+                            </tbody>
+                        </table>
+
                     </section>
                     {/* Tipos de Productos */}
                     <section
@@ -361,6 +622,31 @@ const AdminDashboard = () => {
                             <button onClick={(e) => saveTipoProducto(e)}
                                 type="submit" className="btn-submit">Crear Tipo de Producto</button>
                         </form>
+
+                        <table class="table-secondary">
+                            <thead>
+                                <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nombre del tipo de producto</th>
+                                <th scope='col'></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    roles.map((tipoProducto, index) =>(
+                                        <tr key={tipoProducto.idTipoProducto}>
+                                            <td>{index + 1}</td>
+                                            <td>{tipoProducto.nombreTipoProducto}</td>
+                                            <td>
+                                                <button type="button" className="btn btn-danger" onClick={() => deleteTipoProducto(tipoProducto.idTipoProducto)}>Eliminar</button>
+                                                <button type="button" className="btn btn-warning" onClick={() => editTipoProducto(tipoProducto)}>Editar</button>
+                                            </td>
+                                        </tr>
+                                    ))
+                                }
+                            </tbody>
+                        </table>
+
                     </section>
                     {/* Mesas */}
                     <section
@@ -393,6 +679,31 @@ const AdminDashboard = () => {
                             <button onClick={(e) => saveMesa(e)}
                                 type="submit" className="btn-submit">Crear Mesa</button>
                         </form>
+
+                        <table className="table-secondary">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Capacidad</th>
+                                    <th scope='col'></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    mesas.map((mesa, index) => (
+                                        <tr key={mesa.idMesas}>
+                                            <td>{index + 1}</td>
+                                            <td>{mesa.capacidad}</td>
+                                            <td>
+                                                <button type="button" className="btn btn-danger" onClick={() => deleteMesa(mesa.idMesas)}>Eliminar</button>
+                                                <button type="button" className="btn btn-warning" onClick={() => editMesa(mesa)}>Editar</button>
+                                            </td>
+                                        </tr>
+                                    ))
+                                }
+                            </tbody>
+                        </table>
+
                     </section>
                 </main>
             </div>

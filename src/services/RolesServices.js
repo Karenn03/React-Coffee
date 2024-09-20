@@ -8,16 +8,20 @@ class RolesServices{
     return axios.get(url + "/all");
     }
 
-    createRoles(roles){
-        return axios.post(url + "/create" ,roles);
+    createRoles(rol){
+        return axios.post(url + "/create" ,rol);
     }
 
-    updateRoles(rolesId){
-        return axios.get(url + '/update/' + rolesId);
+    updateRoles(rolesId, rol){
+        return axios.put(url + '/update/' + rolesId, rol);
     }
 
     getRolesById(rolesId){
         return axios.get(url + '/' + rolesId);
+    }
+
+    deleteRol(rolesId){
+        return axios.delete(url + "/delete/" + rolesId)
     }
 }
 
