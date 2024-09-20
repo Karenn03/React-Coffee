@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './SignUp.css';
+import Navbar from '../../components/Navbar/Navbar';
 import logo from '../../assets/img/logo.png'; 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import PersonasServices from '../../services/PersonasServices';
 
 const SignUp = () => {
     // Estados para almacenar los valores de los inputs
@@ -19,20 +21,28 @@ const SignUp = () => {
     // Estado para almacenar los mensajes de error
     const [errorMessage, setErrorMessage] = useState('');
 
-    // Manejar cambios en los inputs
-    const handleInputChange = (e) => {
-        const { id, value } = e.target;
-        setFormData({ ...formData, [id]: value });
-    };
+    const [idPersonas, setIdPersonas] = useState('');
+    const [documento, setDocumento] = useState('');
+    const [nombres, setNombres] = useState('');
+    const [apellidos, setApellidos] = useState('');
+    const [correoElectronico, setCorreoElectronico] = useState('');
+    const [contraseña, setContraseña] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [telefono, setTelefono] = useState('');
+    const [direccion, setDireccion] = useState('');
+    const navigate = useNavigate();
+    const {id} = useParams();
 
-    // Manejar envío del formulario
-    const handleSubmit = (e) => {
+    const savePerson = (e) => {
         e.preventDefault();
-        if (!validateRegistrationForm()) {
-            return;
-        }
-        console.log('Formulario enviado', formData);
-    };
+        const person = {idPersonas, documento, nombres, apellidos, correoElectronico, contraseña, confirmPassword, telefono, direccion };
+        PersonasServices.createPersona(person).then((response) => {
+           console.log(response.data);
+           navigate('/AdminDashboard');
+        }).catch(error => {
+            console.log(error)
+        })
+    }
 
     // Validación del formulario
     const validateRegistrationForm = () => {
@@ -110,57 +120,108 @@ const SignUp = () => {
     };
 
     return (
-        <section className="registration-section">
-            <div className="form-container">
-                <div className="logo-container">
-                    <img src={logo} alt="Logo" />
+        <>
+            <Navbar />
+            <section className="registration-section">
+                <div className="form-container">
+                    <div className="logo-container">
+                        <img src={logo} alt="Logo" />
+                    </div>
+                    <h2>¿Ya tienes una cuenta? <Link to="/signIn">Inicia sesión</Link></h2>
+                    <form className="registration-form" id="form">
+                        <div className="form-group">
+                            <i className="fa fa-id-card" />
+                            <input
+                                type="text"
+                                id="documento"
+                                placeholder="Documento"
+                                value={documento} 
+                                onChange={(e) => setDocumento(e.target.value)} 
+                            />
+                        </div>
+                        <div className="form-group">
+                            <i className="fa fa-user-pen" />
+                            <input
+                                type="text"
+                                id="nombres"
+                                placeholder="Nombres"
+                                value={nombres} 
+                                onChange={(e) => setNombres(e.target.value)} 
+                            />
+                        </div>
+                        <div className="form-group">
+                            <i className="fa fa-user-large" />
+                            <input
+                                type="text"
+                                id="apellidos"
+                                placeholder="Apellidos"
+                                value={apellidos} 
+                                onChange={(e) => setApellidos(e.target.value)} 
+                            />
+                        </div>
+                        <div className="form-group">
+                            <i className="fa fa-envelope" />
+                            <input
+                                type="email"
+                                id="correoElectronico"
+                                placeholder="Correo Electrónico"
+                                value={correoElectronico} 
+                                onChange={(e) => setCorreoElectronico(e.target.value)} 
+                            />
+                        </div>
+                        <div className="form-group">
+                            <i className="fa fa-lock" />
+                            <input
+                                type="password"
+                                id="contraseña"
+                                placeholder="Contraseña"
+                                value={contraseña} 
+                                onChange={(e) => setContraseña(e.target.value)} 
+                            />
+                        </div>
+                        <div className="form-group">
+                            <i className="fa fa-lock" />
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                placeholder="Confirmar Contraseña"
+                                value={confirmPassword} 
+                                onChange={(e) => setConfirmPassword(e.target.value)} 
+                            />
+                        </div>
+                        <div className="form-group">
+                            <i className="fa fa-phone" />
+                            <input
+                                type="tel"
+                                id="telefono"
+                                placeholder="Telefono"
+                                value={telefono} 
+                                onChange={(e) => setTelefono(e.target.value)} 
+                            />
+                        </div>
+                        <div className="form-group">
+                            <i className="fa fa-location-dot" />
+                            <input
+                                type="text"
+                                id="direccion"
+                                placeholder="Dirección"
+                                value={direccion} 
+                                onChange={(e) => setDireccion(e.target.value)} 
+                            />
+                        </div>
+                        <button type="submit" className="register-btn" onClick={(e) => savePerson(e)}>Regístrate</button>
+                    </form>
+                    {errorMessage && <p className="error-message">{errorMessage}</p>}
+                    <div className="social-login">
+                        <p>O conéctate con</p>
+                        <div className="social-icons">
+                            <a href="#"><i className="fab fa-facebook" /></a>
+                            <a href="#"><i className="fab fa-google" /></a>
+                        </div>
+                    </div>
                 </div>
-                <h2>¿Ya tienes una cuenta? <Link to="/signIn">Inicia sesión</Link></h2>
-                <form className="registration-form" id="form" onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <i className="fa fa-id-card" />
-                        <input type="text" id="documento" placeholder="Documento" value={formData.documento} onChange={handleInputChange} />
-                    </div>
-                    <div className="form-group">
-                        <i className="fa fa-user-pen" />
-                        <input type="text" id="nombres" placeholder="Nombres" value={formData.nombres} onChange={handleInputChange} />
-                    </div>
-                    <div className="form-group">
-                        <i className="fa fa-user-large" />
-                        <input type="text" id="apellidos" placeholder="Apellidos" value={formData.apellidos} onChange={handleInputChange} />
-                    </div>
-                    <div className="form-group">
-                        <i className="fa fa-envelope" />
-                        <input type="email" id="correoElectronico" placeholder="Correo Electrónico" value={formData.correoElectronico} onChange={handleInputChange} />
-                    </div>
-                    <div className="form-group">
-                        <i className="fa fa-lock" />
-                        <input type="password" id="contraseña" placeholder="Contraseña" value={formData.contraseña} onChange={handleInputChange} />
-                    </div>
-                    <div className="form-group">
-                        <i className="fa fa-lock" />
-                        <input type="password" id="confirmPassword" placeholder="Confirmar Contraseña" value={formData.confirmPassword} onChange={handleInputChange} />
-                    </div>
-                    <div className="form-group">
-                        <i className="fa fa-phone" />
-                        <input type="tel" id="telefono" placeholder="Teléfono" value={formData.telefono} onChange={handleInputChange} />
-                    </div>
-                    <div className="form-group">
-                        <i className="fa fa-location-dot" />
-                        <input type="text" id="direccion" placeholder="Dirección" value={formData.direccion} onChange={handleInputChange} />
-                    </div>
-                    <button type="submit" className="register-btn">Regístrate</button>
-                </form>
-                {errorMessage && <p className="error-message">{errorMessage}</p>}
-                <div className="social-login">
-                    <p>O conéctate con</p>
-                    <div className="social-icons">
-                        <a href="#"><i className="fab fa-facebook" /></a>
-                        <a href="#"><i className="fab fa-google" /></a>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
+        </>
     );
 };
         
