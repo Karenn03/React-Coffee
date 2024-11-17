@@ -1,1 +1,2 @@
-# React Coffee Tech
+# Coffee Tech
+Frontend of the Coffee Tech project
